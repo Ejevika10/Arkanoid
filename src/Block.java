@@ -1,10 +1,23 @@
 public class Block extends Element {
-    private int width,height;
+    private int hardness;
+    Bonus bonus;
 
-    public Block(String color, int x, int y, int width, int height) {
-        super(color, x, y);
-        this.width = width;
-        this.height = height;
+    public Block(int color, int x, int y, int width, int height, int type,int hardness) {
+        super(color, x, y,width,height, type);
+        this.hardness = hardness;
+    }
+    public void setHardness(int hardness){
+        this.hardness = hardness;
+    }
+
+    public int getHardness(){
+        return this.hardness;
+    }
+    public void destroy(){
+
+    }
+    public void getBonus(Bonus bonus){
+
     }
 
     @Override

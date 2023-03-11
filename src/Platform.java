@@ -1,17 +1,11 @@
 public class Platform extends Element{
-    private int width,height;
 
-    public int getWidth() {
-        return width;
-    }
-    public int getHeight() {
-        return height;
+    public Platform(int color, int x, int y, int width, int height, int type) {
+        super(color, x, y,width,height,type);
     }
 
-    public Platform(String color, int x, int y, int width, int height) {
-        super(color, x, y);
-        this.width = width;
-        this.height = height;
+    void changeWidth(){
+
     }
 
     @Override

@@ -1,16 +1,20 @@
 public class GameMessage extends Element{
-    private String message;
+    private String info;
 
-    public GameMessage(String message, String color, int x, int y) {
-        super(color, x, y);
-        this.message = message;
+    public GameMessage(String color, int x, int y, int width, int height, int type,String info) {
+        super(color, x, y, width, height, type);
+        this.info = info;
     }
+
 
     public void setMessage(String message) {
-        this.message = message;
+        this.info = message;
     }
 
-    void showMessage(){
+    public void show(){
+
+    }
+    public void hide(){
 
     }
 

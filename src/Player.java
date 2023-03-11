@@ -1,13 +1,17 @@
 public class Player {
-    private Ball[] balls;
-    private Platform platform;
-    private PlayerScore playerScore;
+    int score;
+    int lives;
+    String name;
 
-    Player(){
-
+    public void setLives(int lives) {
+        this.lives = lives;
     }
 
-    public PlayerScore getPlayerScore() {
-        return playerScore;
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setScore(int score){
+        this.score = score;
     }
 }

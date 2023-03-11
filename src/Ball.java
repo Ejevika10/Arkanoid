@@ -1,13 +1,13 @@
 public class Ball extends Element{
-    private int diametr;
+    private int radius;
 
-    public int getDiametr() {
-        return diametr;
+    public int getRadius() {
+        return radius;
     }
 
-    public Ball(String color, int x, int y, int diametr) {
-        super(color, x, y);
-        this.diametr = diametr;
+    public Ball(int color, int x, int y, int height, int width, int type, int radius) {
+        super(color, x, y,width,height,type);
+        this.radius = radius;
     }
 
     @Override
