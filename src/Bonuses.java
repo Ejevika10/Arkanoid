@@ -1,9 +1,13 @@
+import java.awt.*;
+
 public class Bonuses {
     Bonus[] bonuses;
-
-
-    public void addBonus(){
-
+    int pos;
+    Bonuses(){
     }
-
+    public void addBonus(Bonus bonus)
+    {
+        bonuses[pos] = bonus;
+        pos++;
+    }
 }

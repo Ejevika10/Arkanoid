@@ -1,15 +1,26 @@
-public class MenuItem extends Element{
+import java.awt.*;
+
+public class MenuItem extends DisplayObject {
 
     String someInfo;
 
+    public MenuItem(int x, int y, int x1, int y1, int width, int height, Color color, int type, boolean movable) {
+        super(x, y, x1, y1, width, height, color, type, movable);
+    }
 
-    public MenuItem(int color, int x, int y, int width, int height, int type, String someInfo) {
-        super(color, x, y, width, height, type);
-        this.someInfo = someInfo;
+
+    @Override
+    public void move() {
+
     }
 
     @Override
-    void move() {
+    public boolean checkCollision(DisplayObject elem) {
+        return false;
+    }
+
+    @Override
+    public void draw(Graphics2D g2d) {
 
     }
 

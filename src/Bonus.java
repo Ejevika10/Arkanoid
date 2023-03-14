@@ -1,13 +1,25 @@
-public class Bonus extends Element{
-    int bonusType;
+import java.awt.*;
 
-    public Bonus(int color, int x, int y, int width, int height, int type,int bonusType) {
-        super(color, x, y, width, height, type);
+public class Bonus extends DisplayObject {
+    public int bonusType;
+
+    public Bonus(int x, int y, int x1, int y1, int width, int height, Color color, int type, boolean movable,int bonusType) {
+        super(x, y, x1, y1, width, height, color, type, movable);
         this.bonusType = bonusType;
     }
 
     @Override
-    void move() {
+    public void move() {
+
+    }
+
+    @Override
+    public boolean checkCollision(DisplayObject elem) {
+        return false;
+    }
+
+    @Override
+    public void draw(Graphics2D g2d) {
 
     }
 }

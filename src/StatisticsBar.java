@@ -1,14 +1,26 @@
-public class StatisticsBar extends Element {
-    String stat;
+import java.awt.*;
 
+public class StatisticsBar extends DisplayObject {
+    String fullStatistic;
 
-    public StatisticsBar(int color, int x, int y, int width, int height, int type, String stat) {
-        super(color, x, y, width, height, type);
-        this.stat = stat;
+    public StatisticsBar(int x, int y, int x1, int y1, int width, int height, Color color, int type, boolean movable,String stat) {
+        super(x, y, x1, y1, width, height, color, type, movable);
+        this.fullStatistic = stat;
+    }
+    public void updStat(Players players){
+        fullStatistic = players.getFullStatistic();
+    }
+    @Override
+    public void move() {
+
+    }
+    @Override
+    public boolean checkCollision(DisplayObject elem) {
+        return false;
     }
 
     @Override
-    void move() {
+    public void draw(Graphics2D g2d) {
 
     }
 }
