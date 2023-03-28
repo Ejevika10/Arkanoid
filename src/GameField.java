@@ -5,25 +5,18 @@ public class GameField extends JFrame{
     private int x1;
     private int y1;
 
-    AllObjects displayCollection;
+    AllObjects allObj;
     GameField() throws InterruptedException {
-        setTitle("My Panel");
-        displayCollection = new AllObjects();
-        getContentPane().add(displayCollection);
+        setTitle("Arkanoid");
+        allObj = new AllObjects();
+        getContentPane().add(allObj);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(450, 350);
         setVisible(true);
-        displayCollection.gameCicle();
+        allObj.gameCicle();
     }
 
     public void сheckGameState(){
-
-    }
-
-    public void checkCollision(){}
-
-
-    public void addPlayer(Player[] players) {
 
     }
 }
