@@ -6,7 +6,7 @@ public class Platforms {
 
     Platforms(){
         platforms = new Platform[1];
-        platforms[0] = new Platform(175,270,255,290,80,20, Color.YELLOW,3,true);
+        platforms[0] = new Platform(500,715,200,30, Color.YELLOW,7);
         addPlatform(platforms[0]);
     }
     public void addPlatform(Platform platform){

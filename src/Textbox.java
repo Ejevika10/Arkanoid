@@ -4,10 +4,10 @@ public class Textbox extends DisplayObject{
 
     String text;
 
+    public Textbox(int x, int y, int x1, int y1, int x2, int y2, int width, int height, Color color, int type, int movable, int visible) {
 
-    public Textbox(int x, int y, int x1, int y1, int width, int height, Color color, int type, boolean movable) {
-        super(x, y, x1, y1, width, height, color, type, movable);
     }
+
 
     @Override
     public void move() {
