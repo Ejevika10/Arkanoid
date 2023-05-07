@@ -15,8 +15,8 @@ public class MenuItem extends DisplayObject {
     }
 
     @Override
-    public boolean checkCollision(DisplayObject elem) {
-        return false;
+    public void changeDirection(int i) {
+
     }
 
     @Override

@@ -18,12 +18,8 @@ public class Button extends DisplayObject{
     }
 
     @Override
-    public boolean checkCollision(DisplayObject obj) {
-        return false;
-    }
-
-    @Override
     public void draw(Graphics2D g2d) {
 
     }
+
 }

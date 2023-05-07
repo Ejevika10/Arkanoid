@@ -7,7 +7,7 @@ public class Balls {
     int pos = 0;
     Balls(){
         balls = new Ball[1];
-        addBall(new Ball(500,685,15,Color.RED,(float)PI/4 * 5,6));
+        addBall(new Ball(500,685,15,Color.RED.getRed(),Color.RED.getGreen(), Color.RED.getBlue(),(float)PI/4*5,15));
     }
     void addBall(Ball ball){
         balls[pos] = ball;

@@ -17,10 +17,9 @@ public class StatisticsBar extends DisplayObject {
 
     }
     @Override
-    public boolean checkCollision(DisplayObject elem) {
-        return false;
-    }
+    public void changeDirection(int i) {
 
+    }
     @Override
     public void draw(Graphics2D g2d) {
 

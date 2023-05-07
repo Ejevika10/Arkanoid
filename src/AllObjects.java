@@ -1,14 +1,18 @@
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import javax.swing.*;
 import javax.swing.JPanel;
 
-public class AllObjects extends JPanel{
-    DisplayObject[] allObj;
+public class AllObjects extends JPanel {
+    static DisplayObject[] allObj;
     Platform activePlatform;
     int pos = 0;
+    public Timer MyTimer;
 
     AllObjects()
     {
@@ -30,45 +34,31 @@ public class AllObjects extends JPanel{
             pos++;
         }
     }
-
     public void gameCicle() throws InterruptedException {
-        addKeyListener(new KeyAdapter() {
+        MyTimer = new javax.swing.Timer(7,new ActionListener() {
             @Override
-            public void keyPressed(KeyEvent e) {
-                activePlatform.key=e;
-            }
-
-        });
-        while (true)
-        {
-            for (DisplayObject obj: allObj)
-            {
-                if (obj.movable == 1)
-                {
-                    obj.move();
-                    for (DisplayObject obj2: allObj)
-                    {
-                        if (!obj.equals(obj2) && obj2.visible == 1)
-                            if (obj.checkCollision(obj2)){
-                                if (obj2.getClass().toString().equals("class Block")) {
-                                    Block block = (Block) obj2;
-                                    block.setHardness(block.getHardness() - 1);
-                                    switch (block.getHardness()) {
-                                        case 1 -> block.setColor(Color.BLUE);
-                                        case 2 -> block.setColor(Color.CYAN);
+            public void actionPerformed(ActionEvent e) {
+                for (DisplayObject obj: allObj) {
+                    if (obj.movable == 1) {
+                        obj.move();
+                        for (DisplayObject obj2: allObj)
+                        {
+                            if (!obj.equals(obj2) && obj2.visible == 1)
+                                if (obj.checkCollision(obj2)){
+                                    if (obj2.getClass().toString().equals("class Block")) {
+                                        Block block = (Block) obj2;
+                                        block.changeHardness();
                                     }
+                                    break;
                                 }
-                                break;
-                            }
+                        }
                     }
                 }
+                repaint();
             }
-            this.repaint();
-            Thread.sleep(15);
-        }
+        });
+        MyTimer.start();
     }
-    public void deleteObj(DisplayObject obj[]){}
-
 
     @Override
     public void paintComponent(Graphics g) {

@@ -15,11 +15,6 @@ public class Bonus extends DisplayObject {
     }
 
     @Override
-    public boolean checkCollision(DisplayObject elem) {
-        return false;
-    }
-
-    @Override
     public void draw(Graphics2D g2d) {
 
     }

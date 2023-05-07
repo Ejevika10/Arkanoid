@@ -1,4 +1,6 @@
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.lang.reflect.Field;
 
 public abstract class DisplayObject {
     public int x;
@@ -9,69 +11,36 @@ public abstract class DisplayObject {
     public int y2;
     public int width;
     public int height;
-    private Color color;
+    public int colorR;
+    public int colorG;
+    public int colorB;
     public int type;
     public int movable;
     public int visible;
 
-
-    public void setX(int x) {
-        this.x = x;
+    public void changeDirection(int i){
+    };
+    public boolean checkCollision(DisplayObject elem){
+        boolean res = false;
+        if(y2 >= elem.y1 && y1 <= elem.y2)
+            if (x2 >= elem.x1 && x1 <= elem.x2)
+            {
+                if(y1 >= elem.y2 || y2 <= elem.y1)
+                {
+                    changeDirection(1);
+                }
+                else
+                {
+                    changeDirection(2);
+                }
+                res = true;
+            }
+        return res;
     }
-
-    public int getX() {
-        return x;
-    }
-
-    public void setY(int y) {
-        this.y = y;
-    }
-
-    public int getY() {
-        return y;
-    }
-
-    public void setX1(int x1) {
-        this.x1 = x1;
-    }
-
-    public void setX2(int x2) {
-        this.x2 = x2;
-    }
-
-    public void setY1(int y1) {
-        this.y1 = y1;
-    }
-
-    public void setY2(int y2) {
-        this.y2 = y2;
-    }
-
-    public int getX1() {
-        return x1;
-    }
-
-    public int getX2() {
-        return x2;
-    }
-
-    public int getY1() {
-        return y1;
-    }
-
-    public int getY2() {
-        return y2;
-    }
-
-    public void setColor(Color color) {
-        this.color = color;
-    }
-
-    public Color getColor() {
-        return color;
-    }
-
-    public abstract void move();
-    public abstract boolean checkCollision(DisplayObject obj);
     public abstract void draw(Graphics2D g2d);
+    public void move(){}
+    public void toString(String filename){}
+
+    public void fromString(String readLine) {}
+
 }

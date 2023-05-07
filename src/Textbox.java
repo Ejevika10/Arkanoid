@@ -8,15 +8,8 @@ public class Textbox extends DisplayObject{
 
     }
 
-
     @Override
     public void move() {
-
-    }
-
-    @Override
-    public boolean checkCollision(DisplayObject obj) {
-        return false;
     }
 
     @Override

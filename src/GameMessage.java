@@ -23,16 +23,16 @@ public class GameMessage extends DisplayObject {
     public void move() {
 
     }
-
     @Override
-    public boolean checkCollision(DisplayObject elem) {
-        return false;
-    }
+    public void changeDirection(int i) {
 
+    }
     @Override
     public void draw(Graphics2D g2d) {
 
     }
+
+
 
 
 }
