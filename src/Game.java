@@ -18,16 +18,16 @@ public class Game {
     }
 
     public static void start() throws InterruptedException {
+        players = new Players();
         gameField = new GameField();
         menu = new GameMenu();
-
     }
     public static void exit(){
 
     }
     public static void save(){
         Serialization serialization = new Serialization();
-        serialization.serializeToTextFile("Game.txt", gameField.allObj.allObj);
+        //serialization.serializeToTextFile("Game.txt", gameField.allObj.allObj);
         serialization.serializeToJsonFile("Game.json", gameField.allObj.allObj);
     }
     public static void load() throws InterruptedException, IOException {
@@ -40,14 +40,13 @@ public class Game {
     }
     public static void pause(){
         gameField.allObj.MyTimer.stop();
-        gameField.setVisible(false);
+        //gameField.setVisible(false);
         menu.showMenu();
     }
     public static void resume(){
         menu.hideMenu();
-        gameField.setVisible(true);
+        //gameField.setVisible(true);
         gameField.setFocusable(true);
         gameField.allObj.MyTimer.start();
     }
-
 }

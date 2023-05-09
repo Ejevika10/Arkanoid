@@ -1,6 +1,10 @@
 public class Players {
     Player[] players;
 
+    Players(){
+        players = new Player[1];
+        players[0] = new Player();
+    }
     public String getFullStatistic(){
         StringBuilder sb = new StringBuilder();
         sb.append("");
@@ -10,10 +14,6 @@ public class Players {
         }
         String res = sb.toString();
         return res;
-    }
-    public void addPlayer(){
-    }
-    public void deletePlayer(){
     }
 
 }

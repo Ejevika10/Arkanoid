@@ -6,6 +6,7 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
 public class GameField extends JFrame{
+    StatisticsBar menuPanel;
     AllObjects allObj;
     GameField() throws InterruptedException {
         setTitle("Arkanoid");
@@ -14,28 +15,24 @@ public class GameField extends JFrame{
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(1015, 800);
         setLocationRelativeTo(null);
-        JPanel menuPanel = new JPanel(new BorderLayout());
-        menuPanel.setBounds(0,0,1015,50);
-        JButton menuButton = new JButton("Menu");
-        menuPanel.add(menuButton, BorderLayout.EAST);
+        menuPanel = new StatisticsBar();
+
         getContentPane().add(menuPanel, BorderLayout.NORTH);
-        menuButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                dispose();
-                Game.pause();
-            }
-        });
         setVisible(true);
         setFocusable(true);
         requestFocusInWindow();
         addKeyListener(new KeyAdapter() {
             @Override
             public void keyPressed(KeyEvent e) {
-                allObj.activePlatform.key=e;
+                if (e.getKeyCode()==KeyEvent.VK_SPACE) {
+                    Game.pause();
+                }
+                else
+                    allObj.activePlatform.key=e;
             }
 
         });
+
         allObj.gameCicle();
     }
     public void сheckGameState(){

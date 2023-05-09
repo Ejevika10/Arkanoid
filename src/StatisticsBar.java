@@ -1,27 +1,29 @@
+import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-public class StatisticsBar extends DisplayObject {
-    Textbox fullStatistic;
-    PlayerStatistic[] stat;
-    Button[] btn;
+public class StatisticsBar extends JPanel {
+    static JLabel stat;
 
-    public StatisticsBar(int x, int y, int x1, int y1,int x2, int y2, int width, int height, Color color, int type, int movable,int visible, String stat) {
-        //super(x, y, x1, y1, x2, y2, width, height, color, type, movable,visible);
-        this.fullStatistic.text = stat;
-    }
-    public void updStat(Players players){
-        fullStatistic.text = players.getFullStatistic();
-    }
-    @Override
-    public void move() {
+    JButton menuButton;
 
+    StatisticsBar(){
+        setBounds(0,0,1015,50);
+        stat = new JLabel(Game.players.getFullStatistic());
+        menuButton = new JButton("Menu");
+        add(stat,BorderLayout.WEST);
+        add(menuButton, BorderLayout.EAST);
+        menuButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                transferFocusDownCycle();
+                Game.pause();
+            }
+        });
     }
-    @Override
-    public void changeDirection(int i) {
+    public static void updStat(){
+        stat.setText(Game.players.getFullStatistic());
+    }
 
-    }
-    @Override
-    public void draw(Graphics2D g2d) {
-
-    }
 }

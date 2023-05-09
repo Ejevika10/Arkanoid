@@ -12,39 +12,34 @@ public class GameMenu extends JFrame{
         setTitle("Arkanoid");
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(1015, 800);
+        setSize(500, 400);
         setLocationRelativeTo(null);
-        JPanel panel = new JPanel(new GridLayout(6, 3, 10, 50));
+        JPanel panel = new JPanel(new GridLayout(6, 1, 10, 10));
         panel.setBackground(Color.LIGHT_GRAY);
         JLabel titleLabel = new JLabel("Menu");
         titleLabel.setFont(new Font("Arial", Font.BOLD, 24));
         titleLabel.setHorizontalAlignment(JLabel.CENTER);
-        JButton[] but = new JButton[5];
-        but[0] = new JButton("Resume game");
-        but[1] = new JButton("New game");
-        but[2] = new JButton("Save game");
-        but[3] = new JButton("Load game");
-        but[4] = new JButton("Exit");
 
-        // Добавляем элементы на панель
-        JLabel Label = new JLabel(" ");
-        panel.add(Label);
+        JButton resumeGameButton = new JButton("Resume game");
+        JButton newGameButton = new JButton("New game");
+        //JButton settingsGameButton = new JButton("Настройки");
+        JButton saveGameButton = new JButton("Save game");
+        JButton loadGameButton = new JButton("Load game");
+        JButton exitButton = new JButton("Exit");
+
         panel.add(titleLabel);
-        JLabel Label1 = new JLabel(" ");
-        panel.add(Label1);
-        for (int i = 0; i < 5; i++){
-            JLabel Label2 = new JLabel(" ");
-            panel.add(Label2);
-            panel.add(but[i]);
-            JLabel Label3 = new JLabel(" ");
-            panel.add(Label3);
-        }
+        panel.add(resumeGameButton);
+        panel.add(newGameButton);
+        //panel.add(settingsGameButton);
+        panel.add(saveGameButton);
+        panel.add(loadGameButton);
+        panel.add(exitButton);
 
         // Добавляем панель на окно
         getContentPane().add(panel);
 
         // Обработка нажатия на кнопки
-        but[1].addActionListener(new ActionListener() {
+        newGameButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 dispose();
@@ -55,31 +50,29 @@ public class GameMenu extends JFrame{
                 }
             }
         });
-        but[0].addActionListener(new ActionListener() {
+        resumeGameButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 Game.resume();
             }
         });
-        but[3].addActionListener(new ActionListener() {
+        loadGameButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
                     Game.load();
-                } catch (InterruptedException ex) {
-                    throw new RuntimeException(ex);
-                } catch (IOException ex) {
+                } catch (InterruptedException | IOException ex) {
                     throw new RuntimeException(ex);
                 }
             }
         });
-        but[2].addActionListener(new ActionListener() {
+        saveGameButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 Game.save();
             }
         });
-        but[4].addActionListener(new ActionListener() {
+        exitButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 System.exit(0);
@@ -88,8 +81,10 @@ public class GameMenu extends JFrame{
     }
     public void showMenu(){
         setVisible(true);
+        setFocusable(true);
     }
     public void hideMenu(){
         setVisible(false);
+        setFocusable(false);
     }
 }

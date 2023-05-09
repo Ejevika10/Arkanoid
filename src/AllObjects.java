@@ -5,11 +5,12 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.util.HashMap;
 import javax.swing.*;
 import javax.swing.JPanel;
 
 public class AllObjects extends JPanel {
-    static DisplayObject[] allObj;
+    DisplayObject[] allObj;
     Platform activePlatform;
     int pos = 0;
     public Timer MyTimer;
@@ -22,7 +23,7 @@ public class AllObjects extends JPanel {
         Platforms platform = new Platforms();
         activePlatform = platform.platforms[0];
         addObj(platform.platforms);
-        Balls balls= new Balls();
+        Balls balls = Game.players.players[0].balls;
         addObj(balls.balls);
         setFocusable(true);
         requestFocusInWindow();
@@ -48,6 +49,8 @@ public class AllObjects extends JPanel {
                                     if (obj2.getClass().toString().equals("class Block")) {
                                         Block block = (Block) obj2;
                                         block.changeHardness();
+                                        Game.players.players[0].stat.score++;
+                                        StatisticsBar.updStat();
                                     }
                                     break;
                                 }

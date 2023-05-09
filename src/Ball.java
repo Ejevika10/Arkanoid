@@ -47,6 +47,9 @@ public class Ball extends DisplayObject implements Serializable {
             changeDirection(2);
         else if (y1 <= 0)
             changeDirection(1);
+        else if (y2 >= 800)
+            Game.players.players[0].fail();
+
 
         float dx = (float) Math.cos(angle) * speed;
         float dy = (float) Math.sin(angle) * speed;
@@ -58,7 +61,6 @@ public class Ball extends DisplayObject implements Serializable {
         y2 = (int)(y2 + dy);
         y = (int)(y + dy);
     }
-
     @Override
     public void draw(Graphics2D g2d){
         g2d.setColor(new Color(colorR,colorG,colorB));

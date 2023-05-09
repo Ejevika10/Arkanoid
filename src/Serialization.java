@@ -34,18 +34,18 @@ public class Serialization {
                 //String className = reader.readLine();
                 switch (className) {
                     case "Block" -> {
-                        ((Block) AllObjects.allObj[i]).fromString(reader.readLine());
+                        ((Block) Game.gameField.allObj.allObj[i]).fromString(reader.readLine());
                         i++;
                         break;
                     }
                     case "Ball" -> {
-                        ((Ball) AllObjects.allObj[i]).fromString(reader.readLine());
+                        ((Ball) Game.gameField.allObj.allObj[i]).fromString(reader.readLine());
                         i++;
                         break;
                     }
                     case "Platform" -> {
-                        ((Platform) AllObjects.allObj[i]).fromString(reader.readLine());
-                        allObj.activePlatform = (Platform) AllObjects.allObj[i];
+                        ((Platform) Game.gameField.allObj.allObj[i]).fromString(reader.readLine());
+                        allObj.activePlatform = (Platform) Game.gameField.allObj.allObj[i];
                         i++;
                         break;
                     }
@@ -86,18 +86,18 @@ public class Serialization {
                 int classType = objectNode.get("type").asInt();
                 switch (classType) {
                     case 2 -> {
-                        AllObjects.allObj[i] =  mapper.readValue(objectNode.toString(), Block.class);
+                        Game.gameField.allObj.allObj[i] =  mapper.readValue(objectNode.toString(), Block.class);
                         i++;
                         break;
                     }
                     case 1 -> {
-                        AllObjects.allObj[i] =  mapper.readValue(objectNode.toString(), Ball.class);
+                        Game.gameField.allObj.allObj[i] =  mapper.readValue(objectNode.toString(), Ball.class);
                         i++;
                         break;
                     }
                     case 3 -> {
-                        AllObjects.allObj[i] =  mapper.readValue(objectNode.toString(), Platform.class);
-                        allObj.activePlatform = (Platform) AllObjects.allObj[i];
+                        Game.gameField.allObj.allObj[i] =  mapper.readValue(objectNode.toString(), Platform.class);
+                        allObj.activePlatform = (Platform) Game.gameField.allObj.allObj[i];
                         i++;
                         break;
                     }
