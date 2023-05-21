@@ -1,38 +1,50 @@
+import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-public class GameMessage extends DisplayObject {
-    private String message;
+public class GameMessage extends JFrame {
+    public JLabel label;
+    public JButton btn;
 
-    public GameMessage(int x, int y, int x1, int y1, int x2, int y2, int width, int height, Color color, int type, int movable, int visible) {
-        //super(x, y, x1, y1, x2, y2, width, height, color, type, movable, visible);
+    GameMessage(String lbl){
+        setTitle("Arkanoid");
+
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setSize(500, 200);
+        setLocationRelativeTo(null);
+
+        JPanel panel = new JPanel(new GridBagLayout());
+        GridBagConstraints c = new GridBagConstraints();
+
+        panel.setBackground(Color.LIGHT_GRAY);
+        this.label = new JLabel(lbl);
+        this.label.setFont(new Font("Arial", Font.BOLD, 24));
+        this.label.setHorizontalAlignment(JLabel.CENTER);
+        this.btn = new JButton("Ok");
+
+        panel.add(label);
+        panel.add(btn);
+
+
+
+        btn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                hideMsg();
+            }
+        });
+        getContentPane().add(panel);
+
     }
 
-
-    public void setMessage(String message) {
-        this.message = message;
+    public void showMsg(){
+        setVisible(true);
+        setFocusable(true);
     }
-
-    public void show(){
-
+    public void hideMsg(){
+        setVisible(false);
+        setFocusable(false);
+        Game.menu.showMenu();
     }
-    public void hide(){
-
-    }
-
-    @Override
-    public void move() {
-
-    }
-    @Override
-    public void changeDirection(int i) {
-
-    }
-    @Override
-    public void draw(Graphics2D g2d) {
-
-    }
-
-
-
-
 }

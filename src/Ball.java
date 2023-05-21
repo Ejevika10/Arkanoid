@@ -43,16 +43,17 @@ public class Ball extends DisplayObject implements Serializable {
 
     @Override
     public void move() {
-        if (x1 <= 0 || x2 >= 1015)
+        if (x1 <= 0 || x2 >= Game.gameField.width - 135)
             changeDirection(2);
         else if (y1 <= 0)
             changeDirection(1);
-        else if (y2 >= 800)
+        else if (y2 >= Game.gameField.height)
             Game.players.players[0].fail();
 
 
         float dx = (float) Math.cos(angle) * speed;
         float dy = (float) Math.sin(angle) * speed;
+
 
         x1 = (int)(x1  + dx);
         x2 = (int)(x2 + dx);
@@ -107,6 +108,14 @@ public class Ball extends DisplayObject implements Serializable {
                 angle = (float)Math.PI - angle;
                 break;
         }
+    }
+    void chSize(int width,int height){
+        this.x = (width - 135)/2;
+        this.y = height - 115;
+        this.x1 = x - radius;
+        this.x2 = x + radius;
+        this.y1 = y - radius;
+        this.y2 = y + radius;
     }
 }
 

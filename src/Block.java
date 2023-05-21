@@ -28,6 +28,12 @@ public class Block extends DisplayObject implements Serializable {
         this.movable = 0;
         this.visible = 1;
     }
+    public void chSize(int x, int width){
+        this.x = x;
+        this.width = width;
+        this.x1 = x - width/2;
+        this.x2 = x + width/2;
+    }
     Block()
     {
 

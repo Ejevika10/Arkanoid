@@ -28,13 +28,24 @@ public class Platform extends DisplayObject implements Serializable {
         this.movable = 1;
         this.visible = 1;
         this.speed = speed;
+        changeWidth(Game.settings.difficulty);
     }
     Platform()
     {
 
     }
-    void changeWidth(){
-
+    void changeWidth(int index){
+        this.width = width - index*30;
+        this.x1 = x - width/2;
+        this.x2 = x + width/2;
+    }
+    void chSize(int width,int height){
+        this.x = (width - 135)/2;
+        this.y = height - 85;
+        this.x1 = x - this.width/2;
+        this.x2 = x + this.width/2;
+        this.y1 = y - this.height/2;
+        this.y2 = y + this.height/2;
     }
 
     @Override
@@ -56,10 +67,10 @@ public class Platform extends DisplayObject implements Serializable {
                 x2 = width;
                 x = width/2;
             }
-            else if(x2 > 1015){
-                x1 = 1015 - width;
-                x2 = 1015;
-                x = 1015 - width/2;
+            else if(x2 > Game.gameField.width - 135){
+                x1 = Game.gameField.width - 135 - width;
+                x2 = Game.gameField.width - 135;
+                x = Game.gameField.width - 135 - width/2;
             }
         }
     }

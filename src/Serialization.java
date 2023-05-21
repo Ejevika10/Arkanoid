@@ -12,7 +12,7 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 
 public class Serialization {
-    public void serializeToTextFile(String filename, DisplayObject[] allObj) {
+    public void serializeToTextFile(String filename, DisplayObject[] allObj,Settings settings,Players players) {
         try {
             FileWriter writer = new FileWriter(filename);
             writer.write("");
@@ -24,8 +24,10 @@ public class Serialization {
         {
             obj.toString(filename);
         }
+        settings.toString(filename);
+        players.players[0].toString(filename);
     }
-    public void deserializeFromTextFile(String filename, AllObjects allObj){
+    public void deserializeFromTextFile(String filename, AllObjects allObj,Settings settings,Players players){
         try (BufferedReader reader = new BufferedReader(new FileReader(filename))) {
             int i = 0;
             String className = reader.readLine();
@@ -49,6 +51,14 @@ public class Serialization {
                         i++;
                         break;
                     }
+                    case "Settings" ->{
+                        settings.fromString(reader.readLine());
+                        break;
+                    }
+                    case "Player" ->{
+                        players.players[0].fromString(reader.readLine());
+                        break;
+                    }
                     default -> {
                     }
                 }
@@ -58,17 +68,21 @@ public class Serialization {
             e.printStackTrace();
         }
     }
-    public void serializeToJsonFile(String filename, DisplayObject[] allObj) {
+    public void serializeToJsonFile(String filename, DisplayObject[] allObj,Settings settings,Players players) {
         ObjectMapper mapper = new ObjectMapper();
         ObjectNode root = mapper.createObjectNode();
+
+        ObjectNode settingsNode = mapper.valueToTree(settings);
+        root.set("settings", settingsNode);
+
+        ObjectNode playersNode = mapper.valueToTree(players.players[0].stat);
+        root.set("players", playersNode);
 
         ArrayNode objectsNode = root.putArray("objects");
         for (DisplayObject object : allObj) {
             ObjectNode objectNode = mapper.valueToTree(object);
-            //objectNode.put("type", object.getClass().getName());
             objectsNode.add(objectNode);
         }
-
         try {
             File file = new File(filename);
             mapper.writeValue(file, root);
@@ -76,35 +90,17 @@ public class Serialization {
             e.printStackTrace();
         }
     }
-    public void deserializeFromJsonFile(String filename, AllObjects allObj) {
+    public void deserializeFromJsonFile(String filename, AllObjects allObj,Settings settings,Players players) {
         ObjectMapper mapper = new ObjectMapper();
         try {
-            int i = 0;
             JsonNode rootNode = mapper.readTree(new File(filename));
-            JsonNode objectsNode = rootNode.get("objects");
-            for (JsonNode objectNode : objectsNode) {
-                int classType = objectNode.get("type").asInt();
-                switch (classType) {
-                    case 2 -> {
-                        Game.gameField.allObj.allObj[i] =  mapper.readValue(objectNode.toString(), Block.class);
-                        i++;
-                        break;
-                    }
-                    case 1 -> {
-                        Game.gameField.allObj.allObj[i] =  mapper.readValue(objectNode.toString(), Ball.class);
-                        i++;
-                        break;
-                    }
-                    case 3 -> {
-                        Game.gameField.allObj.allObj[i] =  mapper.readValue(objectNode.toString(), Platform.class);
-                        allObj.activePlatform = (Platform) Game.gameField.allObj.allObj[i];
-                        i++;
-                        break;
-                    }
-                    default -> {
-                    }
-                }
-            }
+
+            settings.fromJson(rootNode);
+
+            players.fromJson(rootNode);
+
+            allObj.fromJson(rootNode);
+
         } catch (IOException e) {
             e.printStackTrace();
         }

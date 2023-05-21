@@ -8,16 +8,24 @@ import java.awt.event.KeyEvent;
 public class GameField extends JFrame{
     StatisticsBar menuPanel;
     AllObjects allObj;
+    int width = 1150;
+    int height = 800;
     GameField() throws InterruptedException {
         setTitle("Arkanoid");
-        allObj = new AllObjects();
+        width = 1150;
+        height = 800;
+        setSize(width,height);
+
+        allObj = new AllObjects(width,height);
         getContentPane().add(allObj,BorderLayout.CENTER);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(1015, 800);
+
         setLocationRelativeTo(null);
         menuPanel = new StatisticsBar();
 
         getContentPane().add(menuPanel, BorderLayout.NORTH);
+        getContentPane().add(Game.menu, BorderLayout.EAST);
+
         setVisible(true);
         setFocusable(true);
         requestFocusInWindow();
@@ -33,9 +41,18 @@ public class GameField extends JFrame{
 
         });
 
+        if (Game.settings.size == 1){
+            chSize(800, 600);
+        } else if (Game.settings.size == 3) {
+            chSize((int)java.awt.Toolkit.getDefaultToolkit().getScreenSize().getWidth(), (int)java.awt.Toolkit.getDefaultToolkit().getScreenSize().getHeight()-50);
+        }
+
         allObj.gameCicle();
     }
-    public void сheckGameState(){
-
+    public void chSize(int width, int height){
+        this.width = width;
+        this.height = height;
+        setSize(new Dimension(width,height));
+        allObj.chSize(width,height);
     }
 }

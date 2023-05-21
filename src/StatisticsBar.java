@@ -10,15 +10,15 @@ public class StatisticsBar extends JPanel {
 
     StatisticsBar(){
         setBounds(0,0,1015,50);
-        stat = new JLabel(Game.players.getFullStatistic());
+        stat = new JLabel();
         menuButton = new JButton("Menu");
         add(stat,BorderLayout.WEST);
         add(menuButton, BorderLayout.EAST);
         menuButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                transferFocusDownCycle();
                 Game.pause();
+                transferFocusBackward();
             }
         });
     }
