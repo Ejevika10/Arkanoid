@@ -7,6 +7,8 @@ import java.awt.event.KeyEvent;
 
 public class GameField extends JFrame{
     StatisticsBar menuPanel;
+    public SettingsFrame settingsFrame;
+
     AllObjects allObj;
     int width = 1150;
     int height = 800;
@@ -15,6 +17,7 @@ public class GameField extends JFrame{
         width = 1150;
         height = 800;
         setSize(width,height);
+        setUndecorated(true);
 
         allObj = new AllObjects(width,height);
         getContentPane().add(allObj,BorderLayout.CENTER);
@@ -41,10 +44,17 @@ public class GameField extends JFrame{
 
         });
 
-        if (Game.settings.size == 1){
-            chSize(800, 600);
-        } else if (Game.settings.size == 3) {
-            chSize((int)java.awt.Toolkit.getDefaultToolkit().getScreenSize().getWidth(), (int)java.awt.Toolkit.getDefaultToolkit().getScreenSize().getHeight()-50);
+        switch (Game.settings.size){
+            case 1: chSize(800, 600);
+            break;
+            case 2: chSize(900, 700);
+            break;
+            case 3:chSize(1150, 800);
+            break;
+            case 4:chSize(1300,800);
+            break;
+            case 5:chSize((int)java.awt.Toolkit.getDefaultToolkit().getScreenSize().getWidth(), (int)java.awt.Toolkit.getDefaultToolkit().getScreenSize().getHeight()-50);
+            break;
         }
 
         allObj.gameCicle();
@@ -54,5 +64,8 @@ public class GameField extends JFrame{
         this.height = height;
         setSize(new Dimension(width,height));
         allObj.chSize(width,height);
+        if (width == (int)java.awt.Toolkit.getDefaultToolkit().getScreenSize().getWidth()){
+            setExtendedState(Frame.MAXIMIZED_BOTH);
+        }
     }
 }

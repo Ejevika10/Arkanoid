@@ -1,5 +1,7 @@
 import java.awt.*;
 import java.awt.event.ActionEvent;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.lang.reflect.Field;
 
 public abstract class DisplayObject {
@@ -31,27 +33,12 @@ public abstract class DisplayObject {
                 changeDirection(1);
             else
                 changeDirection(2);
-            //System.out.println("ch\n");
         }
-
-        /*if(y2 >= elem.y1 && y1 <= elem.y2)
-            if (x2 >= elem.x1 && x1 <= elem.x2)
-            {
-                if(y1 >= elem.y2 || y2 <= elem.y1)
-                {
-                    changeDirection(1);
-                }
-                else
-                {
-                    changeDirection(2);
-                }
-                res = true;
-            }*/
         return res;
     }
     public abstract void draw(Graphics2D g2d);
     public void move(){}
-    public void toString(String filename){}
+    public void toString(String filename) throws IOException {}
     public void fromString(String readLine) {}
 
 }

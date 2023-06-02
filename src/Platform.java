@@ -6,7 +6,6 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.Serializable;
-import java.security.Key;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Platform extends DisplayObject implements Serializable {
@@ -26,18 +25,17 @@ public class Platform extends DisplayObject implements Serializable {
         this.colorB = colorB;
         this.type = 3;
         this.movable = 1;
-        this.visible = 1;
+        this.visible = 2;
         this.speed = speed;
-        changeWidth(Game.settings.difficulty);
     }
     Platform()
     {
 
     }
-    void changeWidth(int index){
-        this.width = width - index*30;
-        this.x1 = x - width/2;
-        this.x2 = x + width/2;
+    void changeWidthBonus(int widthNew){
+        this.width = widthNew;
+        this.x1 = x - widthNew/2;
+        this.x2 = x + widthNew/2;
     }
     void chSize(int width,int height){
         this.x = (width - 135)/2;
@@ -47,7 +45,15 @@ public class Platform extends DisplayObject implements Serializable {
         this.y1 = y - this.height/2;
         this.y2 = y + this.height/2;
     }
+    public void setCenter(){
+        this.x = (Game.gameField.width - 135)/2;
+        this.y = Game.gameField.height - 85;
+        this.x1 = x - this.width/2;
+        this.x2 = x + this.width/2;
+        this.y1 = y - this.height/2;
+        this.y2 = y + this.height/2;
 
+    }
     @Override
     public void move() {
         if (key != null){

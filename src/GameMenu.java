@@ -51,7 +51,7 @@ public class GameMenu extends JPanel{
         c.gridy = 6;
         menuPanel.add(settingsGameButton, c);
         c.gridx = 1;
-        c.gridy = 6;
+        c.gridy = 7;
         menuPanel.add(exitButton, c);
         add(menuPanel);
         // Обработка нажатия на кнопки
@@ -101,7 +101,7 @@ public class GameMenu extends JPanel{
         settingsGameButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Game.settings.settingsFrame = new SettingsFrame(Game.settings);
+                Game.gameField.settingsFrame = new SettingsFrame(Game.settings);
             }
         });
         exitButton.addActionListener(new ActionListener() {

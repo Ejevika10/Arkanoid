@@ -1,18 +1,16 @@
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.Serializable;
-import java.lang.reflect.Field;
-import java.net.http.WebSocket;
+import java.util.Collection;
+import java.util.Observable;
+import java.util.Observer;
 
-import static java.lang.Math.PI;
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class Ball extends DisplayObject implements Serializable {
+public class Ball extends DisplayObject implements Serializable, Observer {
     public int radius;
     public int speed;
     public float angle;
@@ -48,13 +46,10 @@ public class Ball extends DisplayObject implements Serializable {
         else if (y1 <= 0)
             changeDirection(1);
         else if (y2 >= Game.gameField.height)
-            Game.players.players[0].fail();
-
+            dropDown();
 
         float dx = (float) Math.cos(angle) * speed;
         float dy = (float) Math.sin(angle) * speed;
-
-
         x1 = (int)(x1  + dx);
         x2 = (int)(x2 + dx);
         x = (int)(x + dx);
@@ -100,13 +95,9 @@ public class Ball extends DisplayObject implements Serializable {
     }
     @Override
     public void changeDirection(int i){
-        switch (i){
-            case 1:
-                angle = -angle;
-                break;
-            case 2:
-                angle = (float)Math.PI - angle;
-                break;
+        switch (i) {
+            case 1 -> angle = -angle;
+            case 2 -> angle = (float) Math.PI - angle;
         }
     }
     void chSize(int width,int height){
@@ -116,6 +107,31 @@ public class Ball extends DisplayObject implements Serializable {
         this.x2 = x + radius;
         this.y1 = y - radius;
         this.y2 = y + radius;
+    }
+
+    public void dropDown(){
+        Game.gameField.allObj.allObj.remove(this);
+        Game.players.players[0].balls.balls.remove(this);
+        Game.gameField.allObj.ballCounter--;
+        if (Game.players.players[0].balls.balls.size() == 0){
+            Game.players.players[0].stat.lives--;
+            StatisticsBar.updStat();
+            if (Game.players.players[0].stat.lives <= 0){
+                Game.gameOver();
+            }
+
+            Balls balls = new Balls(Game.gameField.width,Game.gameField.height);
+            Game.gameField.allObj.allObj.addAll(balls.balls);
+            Game.players.players[0].balls.balls.addAll(balls.balls);
+
+            Game.gameField.allObj.activePlatform.setCenter();
+            Game.gameField.allObj.ballCounter = 1;
+        }
+    }
+
+    @Override
+    public void update(Observable o, Object arg) {
+
     }
 }
 

@@ -1,12 +1,4 @@
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
-import javax.swing.*;
 import java.io.IOException;
-import java.util.TimerTask;
-
-import static com.sun.java.accessibility.util.AWTEventMonitor.addKeyListener;
 
 public class Game {
     static Settings settings;
@@ -26,26 +18,58 @@ public class Game {
         //gameField.add(menu);
     }
     public static void exit(){
-
+        Proxy serialization = new Proxy();
+        serialization.deserializeFromTextFile("New.txt",gameField.allObj,settings,players);
     }
     public static void save(){
-        Serialization serialization = new Serialization();
-        serialization.serializeToTextFile("Game.txt", gameField.allObj.allObj, settings,players);
+        Proxy serialization = new Proxy();
         serialization.serializeToJsonFile("Game.json", gameField.allObj.allObj,settings,players);
+
+        try {
+            serialization.serializeToTextFile("New.txt", gameField.allObj.allObj, settings,players);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
     public static void loadJson() throws InterruptedException, IOException {
         if (gameField == null)
             gameField = new GameField();
-        Serialization serialization = new Serialization();
+        Proxy serialization = new Proxy();
         serialization.deserializeFromJsonFile("Game.json", gameField.allObj, settings,players);
+        Game.gameField.menuPanel.updStat();
+        switch (Game.settings.size){
+            case 1: Game.gameField.chSize(800, 600);
+                break;
+            case 2: Game.gameField.chSize(900, 700);
+                break;
+            case 3:Game.gameField.chSize(1150, 800);
+                break;
+            case 4:Game.gameField.chSize(1300,800);
+                break;
+            case 5:Game.gameField.chSize((int)java.awt.Toolkit.getDefaultToolkit().getScreenSize().getWidth(), (int)java.awt.Toolkit.getDefaultToolkit().getScreenSize().getHeight()-50);
+                break;
+        }
         resume();
     }
 
     public static void loadTxt() throws InterruptedException, IOException {
         if (gameField == null)
             gameField = new GameField();
-        Serialization serialization = new Serialization();
-        serialization.deserializeFromTextFile("Game.txt",gameField.allObj,settings,players);
+        Proxy serialization = new Proxy();
+        serialization.deserializeFromJsonFile("Game.json", gameField.allObj, settings,players);
+        //serialization.deserializeFromTextFile("New.txt",gameField.allObj,settings,players);
+        switch (Game.settings.size){
+            case 1: Game.gameField.chSize(800, 600);
+                break;
+            case 2: Game.gameField.chSize(900, 700);
+                break;
+            case 3:Game.gameField.chSize(1150, 800);
+                break;
+            case 4:Game.gameField.chSize(1300,800);
+                break;
+            case 5:Game.gameField.chSize((int)java.awt.Toolkit.getDefaultToolkit().getScreenSize().getWidth(), (int)java.awt.Toolkit.getDefaultToolkit().getScreenSize().getHeight()-50);
+                break;
+        }
         resume();
     }
     public static void pause(){

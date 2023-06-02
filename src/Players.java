@@ -19,6 +19,7 @@ public class Players {
         {
             sb.append(player.getPlayerStatistic());
         }
+        sb.append("        Level: 1        Record: 3125");
         String res = sb.toString();
         return res;
     }

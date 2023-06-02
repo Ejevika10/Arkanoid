@@ -10,22 +10,8 @@ public class Player implements Serializable {
     Balls balls;
     Player(){
         stat = new PlayerStatistic();
-        platform = Game.gameField.allObj.platform.platforms[0];
+        platform = Game.gameField.allObj.platform.platforms.get(0);
         balls = Game.gameField.allObj.balls;
-    }
-
-    public void fail() {
-        stat.lives--;
-        StatisticsBar.updStat();
-        if (stat.lives <= 0){
-            Game.gameOver();
-        }
-
-        platform = new Platform((Game.gameField.width - 135)/2,Game.gameField.height - 85, 200,30, Color.YELLOW.getRed(), Color.YELLOW.getGreen(), Color.YELLOW.getBlue(),12);
-        balls = new Balls(Game.gameField.width,Game.gameField.height);
-        Game.gameField.allObj.allObj[27] = platform;
-        Game.gameField.allObj.activePlatform = platform;
-        Game.gameField.allObj.allObj[28] = balls.balls[0];
     }
     public String getPlayerStatistic(){
         return "        Name: " + stat.name + "         Score: " + Integer.toString(stat.score) + "         Lives: " + Integer.toString(stat.lives);
